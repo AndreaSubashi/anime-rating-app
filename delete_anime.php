@@ -3,7 +3,7 @@ session_start();
 include 'db.php'; // Include database connection file
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Redirect to login if not logged in
+    echo json_encode(['status' => 'error', 'message' => 'Please log in first.']);
     exit;
 }
 
@@ -15,8 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("DELETE FROM user_ratings WHERE user_id = ? AND anime_id = ?");
     $stmt->execute([$user_id, $anime_id]);
 
-    // Redirect back to the user's anime list page
-    header("Location: mylist.php");
+    echo json_encode(['status' => 'success', 'message' => 'Anime deleted successfully.']);
     exit;
 }
 ?>

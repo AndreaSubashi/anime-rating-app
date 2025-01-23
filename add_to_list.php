@@ -28,9 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $genres_string = implode(', ', $genres); // Convert genres to a string
 
-            // Insert the anime with genres and comment into the database
-            $stmt = $pdo->prepare("INSERT INTO user_ratings (user_id, anime_id, anime_title, rating, anime_comment, anime_genres) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$user_id, $anime_id, $anime_title, 0, $comment, $genres_string]);
+            // Get the anime image URL
+            if (!empty($anime_details['data']['images']['jpg']['image_url'])) {
+                $image_url = $anime_details['data']['images']['jpg']['image_url'];
+            }
+
+            // Insert the anime with genres, image URL, and comment into the database
+            $stmt = $pdo->prepare("INSERT INTO user_ratings (user_id, anime_id, anime_title, rating, anime_comment, anime_genres, anime_image_url) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$user_id, $anime_id, $anime_title, 0, $comment, $genres_string, $image_url]);
 
             // Return a success message as a JSON response
             echo json_encode(['status' => 'success', 'message' => 'Anime added to your list']);

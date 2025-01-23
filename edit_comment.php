@@ -4,7 +4,7 @@ include 'db.php'; // Include the database connection file
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
+        echo json_encode(['status' => 'error', 'message' => 'Please log in first.']);
         exit;
     }
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("UPDATE user_ratings SET anime_comment = ? WHERE user_id = ? AND anime_id = ?");
     $stmt->execute([$comment, $user_id, $anime_id]);
 
-    header("Location: mylist.php");
+    echo json_encode(['status' => 'success', 'message' => 'Comment updated successfully.']);
     exit;
 }
 ?>
