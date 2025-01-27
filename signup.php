@@ -43,16 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="sign_log.css"> <!-- Include your CSS file -->
-    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header class="header">
-        <a href="#" class="logo">Logo</a>
-        <nav class="navbar">
-            <a href="login.php">Login</a>
-            <a href="index.php">Home</a>
-        </nav>
-    </header>
 
     <main>
         <div class="wrapper">
@@ -80,7 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn">Sign Up</button>
                 <div class="register-link">
                     <p>Already have an account?</p>
-                    <a href="login.php">Login</a>
+                    <a href="login.php">Login</a><br><br>
+                    <a href="index.php">Home</a>
                 </div>
             </form>
         </div>

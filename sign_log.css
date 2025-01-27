@@ -12,13 +12,15 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("dark.png") no-repeat;
+    background: url("dark.png");
     background-size: cover;
     background-position: center;
 }
 
 .wrapper{
-    width: 420px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 360px;
     background: transparent;
     border: 2px solid rgba(0,0,0, .2);
     backdrop-filter: blur(20px);
@@ -95,3 +97,4 @@ body{
     text-decoration: underline;
     
 }
+

@@ -60,6 +60,15 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
             <a href="logout.php">Logout</a>
         </nav>
     </header>
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">More</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="index.php">Home</a>
+            <a href="mylist.php">My List</a>
+            <a href="logout.php">Logout</a>        
+        </div>
+    </div>
     
     <main>
         <h2 class="category searchform" >Statistics</h2>
@@ -88,5 +97,27 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
         </div>
 
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+            // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>

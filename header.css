@@ -53,8 +53,67 @@
 
 .header.scrolled {
     background-color: rgba(0, 0, 0, 1); /* Change this to any color/opacity you want */
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease;
 }
 
+@media screen and (max-width: 768px){
+    header{
+        content-visibility: hidden;
+    }
 
+    .searchform{
+        margin-top: 20px;
+    }
+
+    .dropbtn {
+        background-color: var(--text);
+        color: rgb(14, 14, 14);
+        padding: 8px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+      
+    .dropbtn:hover, .dropbtn:focus {
+    background-color: rgb(84, 167, 255);
+    color: var(--text);
+    }
+    
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    }
+    
+    .dropdown-content {
+        margin-top: 3px;
+    display: none;
+    position: absolute;
+    background-color: var(--text);
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+    }
+    
+    .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+    
+    .dropdown a:hover {background-color: #ddd;}
+    
+    .show {display: block;}
+}
+
+@media screen and (min-width: 769px){
+    .dropdown{
+        content-visibility: hidden;
+    }
+}
 

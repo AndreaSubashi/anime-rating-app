@@ -31,16 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="sign_log.css">
-    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header class="header">
-        <a href="#" class="logo">Logo</a>
-        <nav class="navbar">
-            <a href="signup.php">Sign Up</a>
-            <a href="index.php">Home</a>
-        </nav>
-    </header>
     <div class="wrapper">
         <form method="POST" action="login.php">
             <h1>Login</h1>
@@ -58,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn">Login</button>
             <div class="register-link">
                 <p>Don't have an account?</p>
-                <a href="signup.php">Register</a>
+                <a href="signup.php">Register</a><br><br>
+                <a href="index.php">Home</a>
             </div>
         </form>
     </div>
