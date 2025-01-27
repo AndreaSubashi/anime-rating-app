@@ -48,12 +48,13 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
 <head>
     <meta charset="UTF-8">
     <title>Stats</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stats.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header>
-        <h1>Your Stats</h1>
-        <nav>
+    <header class="header">
+        <h1>Anime Rating Website</h1>
+        <nav class="navbar">
             <a href="index.php">Home</a>
             <a href="mylist.php">My List</a>
             <a href="logout.php">Logout</a>
@@ -61,7 +62,7 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
     </header>
     
     <main>
-        <h2>Statistics</h2>
+        <h2 class="category searchform" >Statistics</h2>
 
         <div class="stats-section">
             <h3>Average Rating</h3>

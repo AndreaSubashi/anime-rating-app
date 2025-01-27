@@ -1,0 +1,197 @@
+:root{
+    --text: rgba(219,230,255);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(14, 14, 14);
+    background-size: cover;
+    background-position: center;
+}
+
+h1{
+    color: var(--text);
+    font-size: 20px;
+}
+
+main {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.anime-list {
+    display: grid; /* Use a grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic sizing */
+    gap: 15px; /* Space between grid items */
+    width: 100%; /* Take full width */
+}
+
+.anime-item {
+    display: flex; /* Use flex for horizontal alignment */
+    flex-direction: row; /* Align image and content side by side */
+    max-width: 500px; /* Ensure it adjusts to the grid column */
+    background: rgb(14, 14, 14);
+    border: 1.5px solid rgb(219,230,255, .3);
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 10px;
+    gap: 10px; /* Space between the image and the content */
+}
+
+.anime-item img {
+    height: 250px;
+    width: auto; /* Maintain aspect ratio */
+    border-radius: 6px;
+    flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.anime-item-content {
+    display: flex; /* Use flexbox for vertical alignment */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    flex-grow: 1; /* Allow content to take available space */
+    text-align: left; /* Align text to the left */
+}
+
+.anime-item-content h3, .anime-item-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.anime-item-content button {
+    margin-top: auto; /* Push button to the bottom */
+    width: 100%; /* Buttons take full width */
+    background-color: white;
+    border: 1.5px solid var(--text);
+    border-radius: 6px;
+}
+
+.anime-item button:hover {
+    background-color: var(--text);
+    border-color:rgb(84, 167, 255) ;
+}
+
+.searchform{
+    margin-top: 70px;
+}
+
+.category{
+    color: var(--text);
+}
+
+p{
+    font-size: 12px;
+}
+
+.textlabel{
+    color: white;
+    font-size: 12px;
+    padding-bottom: 10px;
+}
+
+.update-comment-form textarea{
+    box-sizing: border-box;
+    text-align: left;
+    width: 100%;
+    min-height: 80px;
+    resize: none;
+    margin-bottom: 5px;
+    font-size: 12px;
+    background-color: white;
+    border: 1.5px solid var(--text);
+    border-radius: 6px;
+}
+
+.update-comment-form textarea:hover{
+    border-color: rgb(84, 167, 255);
+}
+
+
+.update-comment-form textarea:focus{
+    outline-style: solid ;
+    outline-color: rgb(84, 167, 255);
+    outline-width: 1.5px;
+    border: none;
+    background-color: var(--text);
+
+}
+.update-comment-form, .update-rating-form, .delete-anime-form button{
+    margin-bottom: 5px;
+}
+
+.ratingnum{
+    background-color: white;
+    border: 1.5px solid var(--text);
+    border-radius: 6px;
+}
+
+.ratingnum:hover{
+    border-color: rgb(84, 167, 255);
+}
+
+.ratingnum:focus{
+    outline-style: solid ;
+    outline-color: rgb(84, 167, 255);
+    outline-width: 1.5px;
+    border: none;
+    background-color: var(--text);
+    border-radius: 6px;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.searchform {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid var(--text);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.searchform input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+    color: white;
+}
+
+.searchform input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+.searchform button {
+    padding: 10px 20px;
+    background-color: var(--text);
+    color: rgb(44, 44, 44);
+    border: none;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.searchform button:hover {
+    background-color: rgb(84, 167, 255);
+    transform: scale(1.05);
+}
+
+.searchform button:active {
+    background-color: #004495;
+}

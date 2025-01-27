@@ -28,20 +28,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="sign_log.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="login.php">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
-        <?php if (!empty($error_message)): ?>
-            <p class="error-message" style="color: red;"><?php echo $error_message; ?></p>
-        <?php endif; ?>
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+    <header class="header">
+        <a href="#" class="logo">Logo</a>
+        <nav class="navbar">
+            <a href="signup.php">Sign Up</a>
+            <a href="index.php">Home</a>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <form method="POST" action="login.php">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" name="username" id="username"  placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>  
+                <?php if (!empty($error_message)): ?>
+                    <p class="error-message" style="color: red;"><?php echo $error_message; ?></p>
+                <?php endif; ?>
+                <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+                <p>Don't have an account?</p>
+                <a href="signup.php">Register</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

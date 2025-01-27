@@ -42,39 +42,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+    <link rel="stylesheet" href="sign_log.css"> <!-- Include your CSS file -->
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header>
-        <h1>Sign Up</h1>
-        <nav>
-            <a href="index.php">Home</a>
+    <header class="header">
+        <a href="#" class="logo">Logo</a>
+        <nav class="navbar">
             <a href="login.php">Login</a>
+            <a href="index.php">Home</a>
         </nav>
     </header>
 
     <main>
-        <h2>Create an Account</h2>
-        <form method="POST" action="signup.php">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required><br>
+        <div class="wrapper">
+            <form method="POST" action="signup.php">
+                <h1>Sign Up</h1>
+                <div class="input-box">
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                    <?php if (!empty($error_message)): ?>
+                        <p class="error-message" style="color: red;"><?php echo $error_message; ?></p>
+                    <?php endif; ?>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required><br>
-
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" name="confirm_password" id="confirm_password" required><br>
-
-            <?php if (!empty($error_message)): ?>
-                <p class="error-message" style="color: red;"><?php echo $error_message; ?></p>
-            <?php endif; ?>
-
-            <?php if (!empty($success_message)): ?>
-                <p class="success-message" style="color: green;"><?php echo $success_message; ?></p>
-            <?php endif; ?>
-
-            <button type="submit">Sign Up</button>
-        </form>
+                    <?php if (!empty($success_message)): ?>
+                        <p class="success-message" style="color: green;"><?php echo $success_message; ?></p>
+                    <?php endif; ?>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="register-link">
+                    <p>Already have an account?</p>
+                    <a href="login.php">Login</a>
+                </div>
+            </form>
+        </div>
     </main>
 </body>
 </html>

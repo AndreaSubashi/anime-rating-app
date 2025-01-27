@@ -31,27 +31,29 @@ if (isset($_GET['search'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Anime List</title>
-    <link rel="stylesheet" href="styles.css?v=1.0">
+    <link rel="stylesheet" href="mylist.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header>
-        <h1>My Anime List</h1>
-        <nav>
+    <header class="header">
+    <h1>Anime Rating Website</h1>
+        <nav class="navbar">
             <a href="index.php">Home</a>
-            <a href="logout.php">Logout</a>
             <a href="stats.php">User Stats</a>
+            <a href="logout.php">Logout</a>
         </nav>
     </header>
     
     <main>
         <!-- Search Form -->
-        <form method="GET" action="mylist.php">
+        <form method="GET" action="mylist.php" class="searchform">
             <input type="text" name="search" placeholder="Search for anime..." value="<?php echo htmlspecialchars($search_query); ?>">
             <button type="submit">Search</button>
         </form>
 
-        <h2><?php echo $search_query ? 'Search Results' : 'Your Rated Anime'; ?></h2>
+        <h2 class="category"><?php echo $search_query ? 'Search Results' : 'Your Rated Anime'; ?></h2>
 
         <!-- Search Results (from Jikan API) -->
         <?php if ($search_query && !empty($anime_list['data'])): ?>
@@ -59,14 +61,16 @@ if (isset($_GET['search'])) {
                 <?php foreach ($anime_list['data'] as $anime): ?>
                     <div class="anime-item">
                         <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>">
-                        <h3><?php echo $anime['title']; ?></h3>
-                        <p>Episodes: <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
-                        <p>Score: <?php echo $anime['score'] ?? 'N/A'; ?></p>
-                        <form method="POST" action="add_to_list.php">
-                            <input type="hidden" name="anime_id" value="<?php echo $anime['mal_id']; ?>">
-                            <input type="hidden" name="anime_title" value="<?php echo $anime['title']; ?>">
-                            <button type="submit">Add to My List</button>
-                        </form>
+                        <div class="anime-item-content">
+                            <h3><?php echo $anime['title']; ?></h3>
+                            <p>Episodes: <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
+                            <p>Score: <?php echo $anime['score'] ?? 'N/A'; ?></p>
+                            <form method="POST" action="add_to_list.php">
+                                <input type="hidden" name="anime_id" value="<?php echo $anime['mal_id']; ?>">
+                                <input type="hidden" name="anime_title" value="<?php echo $anime['title']; ?>">
+                                <button type="submit">Add to My List</button>
+                            </form>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -79,28 +83,35 @@ if (isset($_GET['search'])) {
             <?php foreach ($user_anime_list as $anime): ?>
                 <div class="anime-item" id="anime-<?php echo $anime['anime_id']; ?>">
                     <img src="<?php echo $anime['anime_image_url']; ?>" alt="<?php echo $anime['anime_title']; ?>">
-                    <h3><?php echo $anime['anime_title']; ?></h3>
-                    <!-- Rating Update Form -->
-                    <form class="update-rating-form" method="POST">
-                        <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
-                        <label for="rating">Rating:</label>
-                        <input type="number" name="rating" id="rating-<?php echo $anime['anime_id']; ?>" value="<?php echo $anime['rating']; ?>" min="1" max="10">
-                        <button type="submit">Update Rating</button>
-                    </form>
+                    <div class="anime-item-content">
+                        <h3><?php echo $anime['anime_title']; ?></h3>
+                        <!-- Rating Update Form -->
+                        <form class="update-rating-form interactive" method="POST">
+                            <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
+                            <label for="rating" class="textlabel">Rating:</label>
+                            <input type="number" name="rating" id="rating-<?php echo $anime['anime_id']; ?>" value="<?php echo $anime['rating']; ?>" min="1" max="10" class="ratingnum">
+                            <button type="submit">Update Rating</button>
+                        </form>
 
-                    <!-- Comment Update Form -->
-                    <form class="update-comment-form" method="POST">
-                        <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
-                        <label for="comment">Comment:</label>
-                        <textarea name="comment" id="comment-<?php echo $anime['anime_id']; ?>"><?php echo htmlspecialchars($anime['anime_comment']); ?></textarea>
-                        <button type="submit">Update Comment</button>
-                    </form>
-                    
-                    <!-- Delete Button -->
-                    <form class="delete-anime-form" method="POST">
-                        <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
-                        <button type="submit">Delete</button>
-                    </form>
+                        <!-- Comment Update Form -->
+                        <form class="update-comment-form interactive" method="POST">
+                            <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
+                            <label for="comment" class="textlabel">Comment:</label>
+                            <textarea 
+                                name="comment" 
+                                id="comment-<?php echo $anime['anime_id']; ?>"
+                                maxlength="200">
+                                <?php echo htmlspecialchars($anime['anime_comment']); ?>
+                            </textarea>
+                            <button type="submit">Update Comment</button>
+                        </form>
+                        
+                        <!-- Delete Button -->
+                        <form class="delete-anime-form interactive" method="POST">
+                            <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -180,6 +191,15 @@ if (isset($_GET['search'])) {
                     }
                 }
             });
+        });
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Adjust threshold as needed
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     </script>
 </body>
