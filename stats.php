@@ -47,9 +47,12 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stats</title>
     <link rel="stylesheet" href="styles/stats.css">
     <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="images/icon.png">
+
 </head>
 <body>
     <header class="header">
@@ -95,29 +98,11 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
             <h3>Total Rated Anime</h3>
             <p>You have rated <strong><?php echo $total_shows; ?></strong> anime.</p>
         </div>
-
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-            // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/header.js"></script>
 
 </body>
 </html>
