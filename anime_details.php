@@ -21,19 +21,29 @@ if (isset($_GET['anime_id'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" maximum-scale=1.0>
     <title><?php echo $anime['title']; ?> - Anime Details</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add a stylesheet -->
+    <link rel="stylesheet" href="styles/details.css"> <!-- Add a stylesheet -->
+    <link rel="stylesheet" href="styles/header.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Anime Details: <?php echo $anime['title']; ?></h1>
-        <nav>
+        <nav class="navbar">
             <a href="index.php">Home</a>
             <a href="mylist.php">My List</a>
             <a href="logout.php">Logout</a>
         </nav>
     </header>
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">More</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="index.php">Home</a>
+            <a href="mylist.php">My List</a>
+            <a href="logout.php">Logout</a>        
+        </div>
+    </div>
 
     <main>
     <div class="anime-details">
@@ -59,5 +69,35 @@ if (isset($_GET['anime_id'])) {
         </ul>
     </div>
     </main>
+    <script>
+
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Adjust threshold as needed
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+            // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

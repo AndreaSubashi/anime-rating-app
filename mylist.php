@@ -33,8 +33,8 @@ if (isset($_GET['search'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Anime List</title>
-    <link rel="stylesheet" href="mylist.css">
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="styles/mylist.css">
+    <link rel="stylesheet" href="styles/header.css">
 </head>
 <body>
     <header class="header">
@@ -56,10 +56,12 @@ if (isset($_GET['search'])) {
     
     <main>
         <!-- Search Form -->
-        <form method="GET" action="mylist.php" class="searchform">
-            <input type="text" name="search" placeholder="Search for anime..." value="<?php echo htmlspecialchars($search_query); ?>">
-            <button type="submit">Search</button>
-        </form>
+        <div class="searchbar">
+            <form method="GET" action="mylist.php" class="searchform">
+                <input type="text" name="search" placeholder="Search for anime..." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button type="submit">Search</button>
+            </form>
+        </div>
 
         <h2 class="category"><?php echo $search_query ? 'Search Results' : 'Your Rated Anime'; ?></h2>
 
@@ -102,15 +104,10 @@ if (isset($_GET['search'])) {
                         </form>
 
                         <!-- Comment Update Form -->
-                        <form class="update-comment-form interactive" method="POST">
+                        <form class="update-comment-form" method="POST">
                             <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
                             <label for="comment" class="textlabel">Comment:</label>
-                            <textarea 
-                                name="comment" 
-                                id="comment-<?php echo $anime['anime_id']; ?>"
-                                maxlength="200">
-                                <?php echo htmlspecialchars($anime['anime_comment']); ?>
-                            </textarea>
+                            <textarea name="comment" id="comment-<?php echo $anime['anime_id']; ?>"maxlength="200"><?php echo htmlspecialchars($anime['anime_comment']); ?></textarea>
                             <button type="submit">Update Comment</button>
                         </form>
                         

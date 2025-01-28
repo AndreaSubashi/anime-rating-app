@@ -48,8 +48,8 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
 <head>
     <meta charset="UTF-8">
     <title>Stats</title>
-    <link rel="stylesheet" href="stats.css">
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="styles/stats.css">
+    <link rel="stylesheet" href="styles/header.css">
 </head>
 <body>
     <header class="header">

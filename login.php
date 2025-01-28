@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: index.php"); // Redirect to the main page
         exit;
     } else {
-        echo "Invalid username or password.";
+        $error_message = "Invalid username or password.";
     }
 }
 ?>
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="sign_log.css">
+    <link rel="stylesheet" href="styles/sign_log.css">
 </head>
 <body>
     <div class="wrapper">

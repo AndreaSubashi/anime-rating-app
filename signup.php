@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Insert the user into the database
             $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
             if ($stmt->execute([$username, $hashed_password])) {
-                $success_message = "Account created successfully! <a href='login.php'>Login here</a>.";
+                $success_message = "Account created successfully!";
             } else {
                 $error_message = "An error occurred. Please try again later.";
             }
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="sign_log.css"> <!-- Include your CSS file -->
+    <link rel="stylesheet" href="styles/sign_log.css"> <!-- Include your CSS file -->
 </head>
 <body>
 

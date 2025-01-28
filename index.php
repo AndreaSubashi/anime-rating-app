@@ -77,8 +77,8 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Rating Website</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add a stylesheet -->
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="styles/main.css"> <!-- Add a stylesheet -->
+    <link rel="stylesheet" href="styles/header.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery for AJAX -->
 </head>
 <body>
