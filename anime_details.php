@@ -25,6 +25,8 @@ if (isset($_GET['anime_id'])) {
     <title><?php echo $anime['title']; ?> - Anime Details</title>
     <link rel="stylesheet" href="styles/details.css"> <!-- Add a stylesheet -->
     <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="images/icon.png">
+
 </head>
 <body>
     <header class="header">
@@ -46,58 +48,30 @@ if (isset($_GET['anime_id'])) {
     </div>
 
     <main>
-    <div class="anime-details">
-        <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>">
-        <p><strong>Synopsis:</strong> <?php echo $anime['synopsis']; ?></p>
-        <p><strong>Episodes:</strong> <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
-        <p><strong>Score:</strong> <?php echo $anime['score'] ?? 'N/A'; ?></p>
-        <p><strong>Rank:</strong> <?php echo $anime['rank'] ?? 'N/A'; ?></p>
-        <p><strong>Popularity:</strong> <?php echo $anime['popularity'] ?? 'N/A'; ?></p>
-        <p><strong>Members:</strong> <?php echo $anime['members'] ?? 'N/A'; ?></p>
-        <p><strong>Status:</strong> <?php echo $anime['status']; ?></p>
-        <p><strong>Source:</strong> <?php echo $anime['source']; ?></p>
-        <p><strong>Duration:</strong> <?php echo $anime['duration'] ?? 'Unknown'; ?></p>
-        <p><strong>Broadcast:</strong> <?php echo $anime['broadcast']['string'] ?? 'Unknown'; ?></p>
-        <p><strong>Studio(s):</strong> <?php echo implode(', ', array_column($anime['studios'], 'name')); ?></p>
-        <p><strong>Genres:</strong> <?php echo implode(', ', array_column($anime['genres'], 'name')); ?></p>
-        <p><strong>Demographics:</strong> <?php echo implode(', ', array_column($anime['demographics'], 'name')); ?></p>
+        <div class="anime-details">
+            <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>">
+            <p><strong>Synopsis:</strong> <?php echo $anime['synopsis']; ?></p>
+            <p><strong>Episodes:</strong> <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
+            <p><strong>Score:</strong> <?php echo $anime['score'] ?? 'N/A'; ?></p>
+            <p><strong>Rank:</strong> <?php echo $anime['rank'] ?? 'N/A'; ?></p>
+            <p><strong>Popularity:</strong> <?php echo $anime['popularity'] ?? 'N/A'; ?></p>
+            <p><strong>Members:</strong> <?php echo $anime['members'] ?? 'N/A'; ?></p>
+            <p><strong>Status:</strong> <?php echo $anime['status']; ?></p>
+            <p><strong>Source:</strong> <?php echo $anime['source']; ?></p>
+            <p><strong>Duration:</strong> <?php echo $anime['duration'] ?? 'Unknown'; ?></p>
+            <p><strong>Broadcast:</strong> <?php echo $anime['broadcast']['string'] ?? 'Unknown'; ?></p>
+            <p><strong>Studio(s):</strong> <?php echo implode(', ', array_column($anime['studios'], 'name')); ?></p>
+            <p><strong>Genres:</strong> <?php echo implode(', ', array_column($anime['genres'], 'name')); ?></p>
+            <p><strong>Demographics:</strong> <?php echo implode(', ', array_column($anime['demographics'], 'name')); ?></p>
 
-        <!-- Trailer -->
-        <?php if (isset($anime['trailer']['url'])): ?>
-            <p><strong>Trailer:</strong> <a href="<?php echo $anime['trailer']['url']; ?>" target="_blank">Watch Trailer</a></p>
-        <?php endif; ?>
-        </ul>
-    </div>
+            <!-- Trailer -->
+            <?php if (isset($anime['trailer']['url'])): ?>
+                <p><strong>Trailer:</strong> <a href="<?php echo $anime['trailer']['url']; ?>" target="_blank">Watch Trailer</a></p>
+            <?php endif; ?>
+            </ul>
+        </div>
     </main>
-    <script>
-
-        const header = document.querySelector('.header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Adjust threshold as needed
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-            // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/dropdown.js"></script>
+    <script src="js/header.js"></script>
 </body>
 </html>

@@ -195,3 +195,8 @@ p{
 .searchform button:active {
     background-color: #004495;
 }
+
+.link{
+    text-decoration: underline;
+    color: var(--text);
+}

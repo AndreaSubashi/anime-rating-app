@@ -35,6 +35,8 @@ if (isset($_GET['search'])) {
     <title>My Anime List</title>
     <link rel="stylesheet" href="styles/mylist.css">
     <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="images/icon.png">
+
 </head>
 <body>
     <header class="header">
@@ -94,7 +96,7 @@ if (isset($_GET['search'])) {
                 <div class="anime-item" id="anime-<?php echo $anime['anime_id']; ?>">
                     <img src="<?php echo $anime['anime_image_url']; ?>" alt="<?php echo $anime['anime_title']; ?>">
                     <div class="anime-item-content">
-                        <h3><?php echo $anime['anime_title']; ?></h3>
+                        <h3><a href="anime_details.php?anime_id=<?php echo $anime['anime_id']; ?>" target="_blank" class="link"><?php echo $anime['anime_title']; ?></a></h3>
                         <!-- Rating Update Form -->
                         <form class="update-rating-form interactive" method="POST">
                             <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
@@ -124,106 +126,8 @@ if (isset($_GET['search'])) {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-        // Handle the update of rating dynamically
-        $(".update-rating-form").on("submit", function(event) {
-            event.preventDefault();
-            var form = $(this);
-            var anime_id = form.find("input[name='anime_id']").val();
-            var rating = form.find("input[name='rating']").val();
-
-            $.ajax({
-                url: "edit_rating.php",
-                type: "POST",
-                data: {
-                    anime_id: anime_id,
-                    rating: rating
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    alert(data.message);
-                    if (data.status === "success") {
-                        // Update the displayed rating
-                        $("#rating-" + anime_id).val(rating);
-                    }
-                }
-            });
-        });
-
-        // Handle the update of comment dynamically
-        $(".update-comment-form").on("submit", function(event) {
-            event.preventDefault();
-            var form = $(this);
-            var anime_id = form.find("input[name='anime_id']").val();
-            var comment = form.find("textarea[name='comment']").val();
-
-            $.ajax({
-                url: "edit_comment.php",
-                type: "POST",
-                data: {
-                    anime_id: anime_id,
-                    comment: comment
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    alert(data.message);
-                    if (data.status === "success") {
-                        // Update the displayed comment
-                        $("#comment-" + anime_id).text(comment);
-                    }
-                }
-            });
-        });
-
-        // Handle the delete action dynamically
-        $(".delete-anime-form").on("submit", function(event) {
-            event.preventDefault();
-            var form = $(this);
-            var anime_id = form.find("input[name='anime_id']").val();
-
-            $.ajax({
-                url: "delete_anime.php",
-                type: "POST",
-                data: {
-                    anime_id: anime_id
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    alert(data.message);
-                    if (data.status === "success") {
-                        // Remove the anime item from the list
-                        $("#anime-" + anime_id).remove();
-                    }
-                }
-            });
-        });
-        const header = document.querySelector('.header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Adjust threshold as needed
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-            // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/dynamic_interaction.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/dropdown.js"></script>
 </body>
 </html>

@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles/sign_log.css">
+    <link rel="icon" href="images/icon.png">
+
 </head>
 <body>
     <div class="wrapper">

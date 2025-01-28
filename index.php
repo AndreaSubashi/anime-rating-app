@@ -25,7 +25,7 @@ $api_url = ""; // Initialize API URL
 // Check if there’s a search query or category
 if (isset($_GET['search'])) {
     $search_query = $_GET['search'];
-    $api_url = "https://api.jikan.moe/v4/anime?q=" . urlencode($search_query) . "&page=" . $page; // Search query API URL
+    $api_url = "https://api.jikan.moe/v4/top/anime?q=" . urlencode($search_query) . "&page=" . $page; // Search query API URL
 } else {
     // Set API URL based on category
     switch ($category) {
@@ -42,6 +42,7 @@ if (isset($_GET['search'])) {
             // Top anime (default)
             $api_url = "https://api.jikan.moe/v4/top/anime?page=" . $page;
             break;
+        
     }
 }
 
@@ -79,6 +80,7 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
     <title>Anime Rating Website</title>
     <link rel="stylesheet" href="styles/main.css"> <!-- Add a stylesheet -->
     <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="images/icon.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery for AJAX -->
 </head>
 <body>
@@ -130,7 +132,7 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
         <div class="anime-list">
             <?php foreach ($anime_list['data'] as $anime): ?>
                 <div class="anime-item" id="anime-<?php echo $anime['mal_id']; ?>">
-                    <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>" loading="lazy" class="animeimg">
+                    <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>" loading="lazy">
                     <h3><a href="anime_details.php?anime_id=<?php echo $anime['mal_id']; ?>" target="_blank"><?php echo $anime['title']; ?></a></h3>
                     <p>Episodes: <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
                     <p>Score: <?php echo $anime['score'] ?? 'N/A'; ?></p>
@@ -182,63 +184,8 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
         </div>
     </main>
 
-    <script>
-        // Handle form submission with AJAX
-        $(".add-to-list-form").on("submit", function(event) {
-            event.preventDefault();
-            var form = $(this);
-            var button = form.find("button");
-            var originalText = button.text();
-            button.prop('disabled', true).text('Adding...'); // Show loading state
-
-            $.ajax({
-                url: form.attr("action"),
-                type: "POST",
-                data: form.serialize(),
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    if (data.status === "success") {
-                        alert(data.message);
-                        form.html('<p>Already added</p>'); // Replace form with message
-                    } else {
-                        alert(data.message);
-                        button.prop('disabled', false).text(originalText);
-                    }
-                },
-                error: function() {
-                    alert("An error occurred. Please try again.");
-                    button.prop('disabled', false).text(originalText);
-                }
-            });
-        });
-
-        const header = document.querySelector('.header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) { // Adjust threshold as needed
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-            // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/dynamic_add.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/dropdown.js"></script>
 </body>
 </html>
