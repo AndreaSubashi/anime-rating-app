@@ -1,5 +1,10 @@
 <?php
-session_start();
+session_start([
+    'cookie_lifetime' => 86400, // 1 day
+    'cookie_secure' => true, // Use only with HTTPS
+    'cookie_httponly' => true, // Prevents JavaScript access to cookies
+    'use_strict_mode' => true, // Prevents session fixation
+]);
 
 include 'db.php'; // Include the database connection file
 $error_message = '';
@@ -22,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = "Invalid username or password.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -35,12 +35,17 @@ main {
 .anime-item {
     display: flex;
     flex-direction: column;
-    background: rgb(14, 14, 14);
+    background: transparent;
     border: 1.5px solid rgb(219,230,255, .3);
     border-radius: 6px;
     overflow: hidden;
     text-align: center;
     padding:10px;
+}
+
+.anime-item:hover{
+    background-color: #282828;
+    transition: background-color 1s 100ms;
 }
 
 .add-to-list-form{

@@ -25,6 +25,14 @@ main {
     box-sizing: border-box;
 }
 
+.stats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .searchform{
     margin-top: 70px;
 }

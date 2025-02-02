@@ -1,5 +1,10 @@
 <?php
-session_start();
+session_start([
+    'cookie_lifetime' => 86400,
+    'cookie_secure' => true,
+    'cookie_httponly' => true,
+    'use_strict_mode' => true,
+]);
 include 'db.php'; // Include database connection file
 
 if (!isset($_SESSION['user_id'])) {
@@ -74,29 +79,30 @@ $top_genres = array_slice($genre_counts, 0, 3, true);
     </div>
     
     <main>
-        <h2 class="category searchform" >Statistics</h2>
+        <div class="stats">
+            <h2 class="category searchform" >Statistics</h2>
+            <div class="stats-section">
+                <h3>Average Rating</h3>
+                <p>Your average rating: <strong><?php echo $average_score; ?></strong></p>
+            </div>
 
-        <div class="stats-section">
-            <h3>Average Rating</h3>
-            <p>Your average rating: <strong><?php echo $average_score; ?></strong></p>
-        </div>
+            <div class="stats-section">
+                <h3>Top Genres</h3>
+                <?php if (!empty($top_genres)): ?>
+                    <ol>
+                        <?php foreach ($top_genres as $genre => $count): ?>
+                            <li><?php echo htmlspecialchars($genre); ?> (<?php echo $count; ?>)</li>
+                        <?php endforeach; ?>
+                    </ol>
+                <?php else: ?>
+                    <p>No genres available to calculate stats.</p>
+                <?php endif; ?>
+            </div>
 
-        <div class="stats-section">
-            <h3>Top Genres</h3>
-            <?php if (!empty($top_genres)): ?>
-                <ol>
-                    <?php foreach ($top_genres as $genre => $count): ?>
-                        <li><?php echo htmlspecialchars($genre); ?> (<?php echo $count; ?>)</li>
-                    <?php endforeach; ?>
-                </ol>
-            <?php else: ?>
-                <p>No genres available to calculate stats.</p>
-            <?php endif; ?>
-        </div>
-
-        <div class="stats-section">
-            <h3>Total Rated Anime</h3>
-            <p>You have rated <strong><?php echo $total_shows; ?></strong> anime.</p>
+            <div class="stats-section">
+                <h3>Total Rated Anime</h3>
+                <p>You have rated <strong><?php echo $total_shows; ?></strong> anime.</p>
+            </div>
         </div>
     </main>
 

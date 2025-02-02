@@ -44,6 +44,11 @@ main {
     gap: 10px; /* Space between the image and the content */
 }
 
+.anime-item:hover{
+    background-color: #282828;
+    transition: background-color 1s 100ms;
+}
+
 .anime-item img {
     height: 250px;
     width: auto; /* Maintain aspect ratio */

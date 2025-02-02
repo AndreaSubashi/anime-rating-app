@@ -25,7 +25,7 @@ $api_url = ""; // Initialize API URL
 // Check if there’s a search query or category
 if (isset($_GET['search'])) {
     $search_query = $_GET['search'];
-    $api_url = "https://api.jikan.moe/v4/top/anime?q=" . urlencode($search_query) . "&page=" . $page; // Search query API URL
+    $api_url = "https://api.jikan.moe/v4/anime?q=" . urlencode($search_query) . "&page=" . $page; // Search query API URL
 } else {
     // Set API URL based on category
     switch ($category) {
@@ -87,10 +87,9 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
     <header class="header">
         <h1>Anime Rating Website</h1>
         <nav class="navbar">
-            <a href="index.php">Home</a>
-            <a href="index.php?category=top">Top Anime</a>
+            <a href="index.php">Home (Top shows)</a>
             <a href="index.php?category=popular">Popular Shows</a>
-            <a href="index.php?category=seasonal">Seasonal Shows</a>
+            <a href="index.php?category=seasonal">Currently airing</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="mylist.php">My List</a>
                 <a href="stats.php">User Stats</a>
@@ -135,7 +134,14 @@ $total_pages = $anime_list['pagination']['last_visible_page'] ?? 1;
                     <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>" loading="lazy">
                     <h3><a href="anime_details.php?anime_id=<?php echo $anime['mal_id']; ?>" target="_blank"><?php echo $anime['title']; ?></a></h3>
                     <p>Episodes: <?php echo $anime['episodes'] ?? 'Unknown'; ?></p>
-                    <p>Score: <?php echo $anime['score'] ?? 'N/A'; ?></p>
+                    <?php 
+                    if ($category === 'popular') {
+                        echo "<p>Memebers:" . (number_format(round($anime['members'], -3), 0 , '', ',') ?? 'N/A') . "</p>"; 
+                    }
+                    else{
+                        echo "<p>Score:" . ($anime['score'] ?? 'N/A') . "</p>";
+                    }
+                    ?>
 
                     <!-- Check if anime is already added to the user's list -->
                     <?php if (in_array($anime['mal_id'], $user_anime_ids)): ?>

@@ -1,5 +1,10 @@
 <?php
-session_start();
+session_start([
+    'cookie_lifetime' => 86400,
+    'cookie_secure' => true,
+    'cookie_httponly' => true,
+    'use_strict_mode' => true,
+]);
 include 'db.php'; // Include database connection file
 
 if (!isset($_SESSION['user_id'])) {
