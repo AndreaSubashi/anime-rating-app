@@ -1,4 +1,4 @@
-// Handle the update of rating dynamically
+//handle update of rating dynamically
 $(".update-rating-form").on("submit", function(event) {
     event.preventDefault();
     var form = $(this);
@@ -16,14 +16,14 @@ $(".update-rating-form").on("submit", function(event) {
             var data = JSON.parse(response);
             alert(data.message);
             if (data.status === "success") {
-                // Update the displayed rating
+                //update displayed rating
                 $("#rating-" + anime_id).val(rating);
             }
         }
     });
 });
 
-// Handle the update of comment dynamically
+//handle update of comment dynamically
 $(".update-comment-form").on("submit", function(event) {
     event.preventDefault();
     var form = $(this);
@@ -41,14 +41,14 @@ $(".update-comment-form").on("submit", function(event) {
             var data = JSON.parse(response);
             alert(data.message);
             if (data.status === "success") {
-                // Update the displayed comment
+                //pdate displayed comment
                 $("#comment-" + anime_id).text(comment);
             }
         }
     });
 });
 
-// Handle the delete action dynamically
+//handle delete action dynamically
 $(".delete-anime-form").on("submit", function(event) {
     event.preventDefault();
     var form = $(this);
@@ -64,7 +64,7 @@ $(".delete-anime-form").on("submit", function(event) {
             var data = JSON.parse(response);
             alert(data.message);
             if (data.status === "success") {
-                // Remove the anime item from the list
+                //remove anime item from list
                 $("#anime-" + anime_id).remove();
             }
         }

@@ -5,8 +5,9 @@ session_start([
     'cookie_httponly' => true,
     'use_strict_mode' => true,
 ]);
-include 'db.php'; // Include the database connection file
+include 'db.php';
 
+//make sure user is logged-in
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['user_id'])) {
         echo json_encode(['status' => 'error', 'message' => 'Please log in first.']);
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $anime_id = $_POST['anime_id'];
     $comment = $_POST['comment'];
 
-    // Update the comment for the given anime
+    //update comment for given anime
     $stmt = $pdo->prepare("UPDATE user_ratings SET anime_comment = ? WHERE user_id = ? AND anime_id = ?");
     $stmt->execute([$comment, $user_id, $anime_id]);
 

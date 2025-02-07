@@ -1,17 +1,17 @@
 <?php
 session_start();
-include 'db.php'; // Include the database connection file
+include 'db.php';
 
-// Get the anime ID from the URL
+//get anime ID from URL
 if (isset($_GET['anime_id'])) {
     $anime_id = $_GET['anime_id'];
 
-    // Fetch anime details from the Jikan API
+    //fetch() anime details from Jikan API
     $api_url = "https://api.jikan.moe/v4/anime/" . $anime_id;
     $response = file_get_contents($api_url);
-    $anime_details = json_decode($response, true); // Decode the JSON response
+    $anime_details = json_decode($response, true); //decode JSON response
 
-    $anime = $anime_details['data']; // Anime details
+    $anime = $anime_details['data'];
 } else {
     die('Anime ID is required.');
 }
@@ -23,7 +23,7 @@ if (isset($_GET['anime_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" maximum-scale=1.0>
     <title><?php echo $anime['title']; ?> - Anime Details</title>
-    <link rel="stylesheet" href="styles/details.css"> <!-- Add a stylesheet -->
+    <link rel="stylesheet" href="styles/details.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="icon" href="images/icon.png">
 
@@ -47,7 +47,9 @@ if (isset($_GET['anime_id'])) {
         </div>
     </div>
 
+    
     <main>
+        <!-- extensive details -->
         <div class="anime-details">
             <img src="<?php echo $anime['images']['jpg']['image_url']; ?>" alt="<?php echo $anime['title']; ?>">
             <p><strong>Synopsis:</strong> <?php echo $anime['synopsis']; ?></p>
@@ -63,10 +65,11 @@ if (isset($_GET['anime_id'])) {
             <p><strong>Studio(s):</strong> <?php echo implode(', ', array_column($anime['studios'], 'name')); ?></p>
             <p><strong>Genres:</strong> <?php echo implode(', ', array_column($anime['genres'], 'name')); ?></p>
             <p><strong>Demographics:</strong> <?php echo implode(', ', array_column($anime['demographics'], 'name')); ?></p>
-
-            <!-- Trailer -->
-            <?php if (isset($anime['trailer']['url'])): ?>
-                <p><strong>Trailer:</strong> <a href="<?php echo $anime['trailer']['url']; ?>" target="_blank">Watch Trailer</a></p>
+            <!-- trailer -->
+            <?php if (isset($anime['trailer']['embed_url'])): ?>
+                <p><strong>Trailer:</strong></p><br>
+                <iframe width="560" height="315" src="<?php echo $anime['trailer']['embed_url']; ?>" 
+                    frameborder="0" allowfullscreen></iframe>
             <?php endif; ?>
             </ul>
         </div>

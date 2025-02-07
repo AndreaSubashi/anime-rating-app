@@ -1,28 +1,28 @@
 <?php
 session_start();
-include 'db.php'; // Include database connection file
+include 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Redirect to login if the user is not logged in
+    header("Location: login.php"); //redirect to login if user is not logged in
     exit;
 }
 
-$user_id = $_SESSION['user_id']; // Get the logged-in user ID
+$user_id = $_SESSION['user_id']; //get logged-in user ID
 $stmt = $pdo->prepare("SELECT * FROM user_ratings WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user_anime_list = $stmt->fetchAll();
 
 $anime_list = [];
-$search_query = ''; // Initialize search query
+$search_query = ''; //initialize search query
 
-// Check if there’s a search query
+//check if there’s a search query
 if (isset($_GET['search'])) {
     $search_query = $_GET['search'];
-    $api_url = "https://api.jikan.moe/v4/anime?q=" . urlencode($search_query); // API URL with search query
+    $api_url = "https://api.jikan.moe/v4/anime?q=" . urlencode($search_query); //API URL with search query
     $response = file_get_contents($api_url);
-    $anime_list = json_decode($response, true); // Decode the JSON response for search results
+    $anime_list = json_decode($response, true); //decode the JSON response for search results
 } else {
-    // If no search query, don't modify the anime list (just display user’s anime list)
+    //if no search query, don't modify anime list (just display user’s anime list)
     $anime_list = ['data' => []];
 }
 ?>
@@ -57,7 +57,6 @@ if (isset($_GET['search'])) {
     </div>
     
     <main>
-        <!-- Search Form -->
         <div class="searchbar">
             <form method="GET" action="mylist.php" class="searchform">
                 <input type="text" name="search" placeholder="Search for anime..." value="<?php echo htmlspecialchars($search_query); ?>">
@@ -67,7 +66,7 @@ if (isset($_GET['search'])) {
 
         <h2 class="category"><?php echo $search_query ? 'Search Results' : 'Your Rated Anime'; ?></h2>
 
-        <!-- Search Results (from Jikan API) -->
+        <!--search Results (from API) -->
         <?php if ($search_query && !empty($anime_list['data'])): ?>
             <div class="anime-list">
                 <?php foreach ($anime_list['data'] as $anime): ?>
@@ -90,14 +89,14 @@ if (isset($_GET['search'])) {
             <p>No results found for "<?php echo htmlspecialchars($search_query); ?>". Try searching with a different term.</p>
         <?php endif; ?>
 
-        <!-- User's Anime List -->
+        <!--user's Anime List -->
         <div class="anime-list">
             <?php foreach ($user_anime_list as $anime): ?>
                 <div class="anime-item" id="anime-<?php echo $anime['anime_id']; ?>">
                     <img src="<?php echo $anime['anime_image_url']; ?>" alt="<?php echo $anime['anime_title']; ?>">
                     <div class="anime-item-content">
                         <h3><a href="anime_details.php?anime_id=<?php echo $anime['anime_id']; ?>" target="_blank" class="link"><?php echo $anime['anime_title']; ?></a></h3>
-                        <!-- Rating Update Form -->
+                        <!--rating Update Form -->
                         <form class="update-rating-form interactive" method="POST">
                             <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
                             <label for="rating" class="textlabel">Rating:</label>
@@ -105,7 +104,7 @@ if (isset($_GET['search'])) {
                             <button type="submit">Update Rating</button>
                         </form>
 
-                        <!-- Comment Update Form -->
+                        <!--comment Update Form -->
                         <form class="update-comment-form" method="POST">
                             <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
                             <label for="comment" class="textlabel">Comment:</label>
@@ -113,7 +112,7 @@ if (isset($_GET['search'])) {
                             <button type="submit">Update Comment</button>
                         </form>
                         
-                        <!-- Delete Button -->
+                        <!--delete Button -->
                         <form class="delete-anime-form interactive" method="POST">
                             <input type="hidden" name="anime_id" value="<?php echo $anime['anime_id']; ?>">
                             <button type="submit">Delete</button>
@@ -125,7 +124,6 @@ if (isset($_GET['search'])) {
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="js/dynamic_interaction.js"></script>
     <script src="js/header.js"></script>
     <script src="js/dropdown.js"></script>

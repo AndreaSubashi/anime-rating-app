@@ -26,22 +26,22 @@ main {
 }
 
 .anime-list {
-    display: grid; /* Use a grid layout */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic sizing */
-    gap: 15px; /* Space between grid items */
-    width: 100%; /* Take full width */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px; 
+    width: 100%; 
 }
 
 .anime-item {
-    display: flex; /* Use flex for horizontal alignment */
-    flex-direction: row; /* Align image and content side by side */
-    max-width: 500px; /* Ensure it adjusts to the grid column */
+    display: flex; 
+    flex-direction: row; 
+    max-width: 500px; 
     background: rgb(14, 14, 14);
     border: 1.5px solid rgb(219,230,255, .3);
     border-radius: 6px;
     overflow: hidden;
     padding: 10px;
-    gap: 10px; /* Space between the image and the content */
+    gap: 10px; 
 }
 
 .anime-item:hover{
@@ -51,17 +51,17 @@ main {
 
 .anime-item img {
     height: 250px;
-    width: auto; /* Maintain aspect ratio */
+    width: auto; 
     border-radius: 6px;
-    flex-shrink: 0; /* Prevent the image from shrinking */
+    flex-shrink: 0; 
 }
 
 .anime-item-content {
-    display: flex; /* Use flexbox for vertical alignment */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: flex-start; /* Align items to the top */
-    flex-grow: 1; /* Allow content to take available space */
-    text-align: left; /* Align text to the left */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    flex-grow: 1; 
+    text-align: left; 
 }
 
 .anime-item-content h3, .anime-item-content p {
@@ -71,8 +71,8 @@ main {
 }
 
 .anime-item-content button {
-    margin-top: auto; /* Push button to the bottom */
-    width: 100%; /* Buttons take full width */
+    margin-top: auto; 
+    width: 100%; 
     background-color: white;
     border: 1.5px solid var(--text);
     border-radius: 6px;

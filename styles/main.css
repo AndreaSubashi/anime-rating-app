@@ -136,7 +136,7 @@ p{
     padding: 8px 12px;
     margin: 0 2px;
     font-size: 14px;
-    color: var(--text); /* Blue color for links */
+    color: var(--text); 
     text-decoration: none;
     border: 1px solid var(--text);
     border-radius: 4px;
@@ -151,12 +151,12 @@ p{
 }
 
 .pagination a:hover {
-    background-color: rgb(84, 167, 255); /* Darker blue on hover */
+    background-color: rgb(84, 167, 255); 
     color: #fff;
 }
 
 .pagination a:disabled, .pagination a[disabled] {
-    color: #ccc; /* Disabled links styling */
+    color: #ccc; 
     border-color: #ccc;
     pointer-events: none;
 }

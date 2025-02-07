@@ -5,7 +5,7 @@ session_start([
     'cookie_httponly' => true,
     'use_strict_mode' => true,
 ]);
-include 'db.php'; // Include database connection file
+include 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -14,12 +14,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch all rated anime for the user
+//fetch all rated anime for user
 $stmt = $pdo->prepare("SELECT * FROM user_ratings WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user_anime_list = $stmt->fetchAll();
 
-// Calculate average rating
+//calculate average rating
 $total_score = 0;
 $total_shows = count($user_anime_list);
 $all_genres = [];
@@ -27,11 +27,11 @@ $all_genres = [];
 foreach ($user_anime_list as $anime) {
     $total_score += $anime['rating'];
     
-    // Collect genres
+    //collect genres
     if (!empty($anime['anime_genres'])) {
         $genres = explode(',', $anime['anime_genres']);
         foreach ($genres as $genre) {
-            $genre = trim($genre); // Clean whitespace
+            $genre = trim($genre); //remove whitespace
             if (!empty($genre)) {
                 $all_genres[] = $genre;
             }
@@ -41,7 +41,7 @@ foreach ($user_anime_list as $anime) {
 
 $average_score = $total_shows > 0 ? round($total_score / $total_shows, 2) : 0;
 
-// Calculate top 3 genres
+//calculate top 3 genres
 $genre_counts = array_count_values($all_genres);
 arsort($genre_counts);
 $top_genres = array_slice($genre_counts, 0, 3, true);

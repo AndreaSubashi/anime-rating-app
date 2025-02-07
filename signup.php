@@ -1,12 +1,12 @@
 <?php
 session_start();
-include 'db.php'; // Include the database connection file
+include 'db.php';
 
-$error_message = ''; // Initialize error message
-$success_message = ''; // Initialize success message
+$error_message = '';
+$success_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = htmlspecialchars(trim($_POST['username'])); // Sanitize the input
+    $username = htmlspecialchars(trim($_POST['username'])); //sanitize input
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -15,16 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirm_password) {
         $error_message = "Passwords do not match.";
     } else {
-        // Check if the username already exists
+        //check if username already exists
         $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$username]);
         if ($stmt->fetch()) {
             $error_message = "Username already exists. Please choose another.";
         } else {
-            // Hash the password
+            //hash password for security
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insert the user into the database
+            //insert user into DB
             $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
             if ($stmt->execute([$username, $hashed_password])) {
                 $success_message = "Account created successfully!";
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="styles/sign_log.css"> <!-- Include your CSS file -->
+    <link rel="stylesheet" href="styles/sign_log.css">
     <link rel="icon" href="images/icon.png">
 
 </head>

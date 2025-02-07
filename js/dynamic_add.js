@@ -1,10 +1,10 @@
-// Handle form submission with AJAX
+//handle form submission with AJAX
 $(".add-to-list-form").on("submit", function(event) {
     event.preventDefault();
     var form = $(this);
     var button = form.find("button");
     var originalText = button.text();
-    button.prop('disabled', true).text('Adding...'); // Show loading state
+    button.prop('disabled', true).text('Adding...'); //show loading state
 
     $.ajax({
         url: form.attr("action"),
@@ -14,7 +14,7 @@ $(".add-to-list-form").on("submit", function(event) {
             var data = JSON.parse(response);
             if (data.status === "success") {
                 alert(data.message);
-                form.html('<p>Already added</p>'); // Replace form with message
+                form.html('<p>Already added</p>'); //replace form with <p>
             } else {
                 alert(data.message);
                 button.prop('disabled', false).text(originalText);

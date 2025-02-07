@@ -1,27 +1,27 @@
 <?php
 session_start([
-    'cookie_lifetime' => 86400, // 1 day
-    'cookie_secure' => true, // Use only with HTTPS
-    'cookie_httponly' => true, // Prevents JavaScript access to cookies
-    'use_strict_mode' => true, // Prevents session fixation
+    'cookie_lifetime' => 86400, //1 day
+    'cookie_secure' => true, //use only with HTTPS
+    'cookie_httponly' => true, //prevents JavaScript access to cookies
+    'use_strict_mode' => true, //prevents session fixation
 ]);
 
-include 'db.php'; // Include the database connection file
+include 'db.php';
 $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = htmlspecialchars(trim($_POST['username']));
     $password = $_POST['password'];
 
-    // Check if the username exists in the database
+    //check if username exists in DB
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        // If the password is correct, start a session for the user
-        session_regenerate_id(true); // Regenerate session ID for security
-        $_SESSION['user_id'] = $user['id']; // Store the user ID in the session
-        header("Location: index.php"); // Redirect to the main page
+        //if password is correct, start a session for user
+        session_regenerate_id(true); //regenerate session ID for security
+        $_SESSION['user_id'] = $user['id']; //store user ID in session
+        header("Location: index.php"); //redirect to main page
         exit;
     } else {
         $error_message = "Invalid username or password.";
